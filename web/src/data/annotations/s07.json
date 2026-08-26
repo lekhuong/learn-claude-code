@@ -13,6 +13,10 @@
       "ja": {
         "title": "まずスキルカタログを注入する",
         "description": "システムプロンプトにはスキル名と短い説明だけを入れます。モデルは能力を発見できますが、毎ターン全 SKILL.md を読む必要はありません。"
+      },
+      "vi": {
+        "title": "Inject catalog skill trước",
+        "description": "System prompt chỉ gồm tên skill và mô tả ngắn. Mô hình khám phá năng lực mà không phải trả giá cho mọi SKILL.md đầy đủ mỗi lượt."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "完全なスキルは tool_result で届く",
         "description": "load_skill は完全な指示を tool result として返します。スキル読み込みが transcript 上の明示的なイベントになり、通常ループと互換です。"
+      },
+      "vi": {
+        "title": "Skill đầy đủ đến qua tool_result",
+        "description": "load_skill trả hướng dẫn đầy đủ như tool result. Việc tải skill trở thành sự kiện rõ trong transcript và vẫn tương thích với vòng lặp thường."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "スキルはコードプラグインではなくファイル",
         "description": "スキルは SKILL.md を持つディレクトリです。ファイルとして扱うことで、作成、レビュー、知識読み込みが分かりやすくなります。"
+      },
+      "vi": {
+        "title": "Skill là file, không phải plugin code",
+        "description": "Một skill là thư mục có SKILL.md. Giữ skill là file khiến viết, review, và tải kiến thức trở nên thẳng."
       }
     }
   ]

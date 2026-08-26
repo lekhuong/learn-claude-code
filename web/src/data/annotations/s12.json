@@ -13,6 +13,10 @@
       "ja": {
         "title": "スケジューラはエージェントループの外で動く",
         "description": "cron の照合は LLM に未来時刻を覚えさせるのではなく、デーモンループで処理します。時間管理と推論を分離し、ユーザーが会話していない時でも定期処理を確実にします。"
+      },
+      "vi": {
+        "title": "Scheduler chạy ngoài vòng lặp Agent",
+        "description": "Khớp cron do vòng daemon xử lý chứ không phải nhờ LLM nhớ thời điểm tương lai. Việc này tách giữ giờ khỏi suy luận và khiến việc lặp lại tin cậy ngay cả khi không có người dùng đang chat."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "キューが期限判定と実行を分離する",
         "description": "スケジュールが一致すると、スケジューラは作業をキューへ入れ、キュープロセッサが agent_loop を呼び出します。cron 照合は速く保たれ、長いエージェント実行が次の確認を妨げません。"
+      },
+      "vi": {
+        "title": "Queue tách thời điểm đến hạn khỏi thực thi",
+        "description": "Khi lịch khớp, scheduler enqueue việc và để queue processor gọi vòng lặp Agent. Cron matching nhờ đó nhanh và các lần chạy Agent dài không chặn kiểm tra lịch sau."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "スケジュールは永続データ",
         "description": "cron ジョブは小さな JSON ファイルに保存され、プロセス再起動後も残ります。予定された作業を、一覧化、取り消し、検査できるデータとして扱います。"
+      },
+      "vi": {
+        "title": "Lịch là dữ liệu bền",
+        "description": "Cron job được lưu trong file JSON nhỏ nên sống sót qua restart process. Bài học coi việc đã lên lịch là dữ liệu có thể liệt kê, hủy, và kiểm, không phải timer ẩn."
       }
     }
   ]

@@ -13,6 +13,10 @@
       "ja": {
         "title": "Bash だけで十分な理由",
         "description": "Bash はファイルの読み書き、任意のプログラムの実行、プロセス間のデータパイプ、ファイルシステムの管理が可能です。追加のツール（read_file、write_file など）は bash が既に提供している機能の部分集合に過ぎません。ツールを増やしても新しい能力は得られず、モデルが理解すべきインターフェースが増えるだけです。モデルが学習するスキーマは1つだけで、実装は100行以内に収まります。これが最小限の実用的エージェント：1つのツール、1つのループです。"
+      },
+      "vi": {
+        "title": "Vì sao chỉ Bash là đủ",
+        "description": "Bash đọc file, ghi file, chạy chương trình tùy ý, pipe dữ liệu giữa process, và quản lý filesystem. Mọi tool thêm (read_file, write_file, v.v.) đều chỉ là tập con nghiêm ngặt của những gì bash đã cung cấp. Thêm tool không mở khóa năng lực mới -- nó chỉ tăng bề mặt gây nhầm lẫn. Mô hình phải học ít schema tool hơn, và implementation giữ dưới 100 dòng. Đây là Agent tối thiểu khả thi: một tool, một vòng lặp."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "再帰プロセス生成によるサブエージェント機構",
         "description": "エージェントが `python v0.py \"subtask\"` を実行すると、新しい LLM コンテキストを持つ完全に新しいプロセスが生成されます。この子プロセスは事実上サブエージェントです：独自のシステムプロンプト、会話履歴、タスクフォーカスを持ちます。完了すると、親プロセスは stdout で結果を受け取ります。これはフレームワークなしのサブエージェント委任です——共有メモリもメッセージパッシングもなく、stdin/stdout だけです。各子プロセスは親のコンテキストを参照できないため、関心の分離が自然に実現されます。"
+      },
+      "vi": {
+        "title": "Spawn process đệ quy như cơ chế subagent",
+        "description": "Khi Agent chạy `python v0.py \"subtask\"`, nó spawn một process hoàn toàn mới với ngữ cảnh LLM mới. Process con này thực chất là subagent: có system prompt riêng, lịch sử hội thoại riêng, và tiêu điểm task riêng. Khi xong, parent nhận kết quả stdout. Đây là ủy thác subagent không cần framework -- chỉ ngữ nghĩa process Unix. Mỗi process con cô lập concern một cách tự nhiên vì nó hoàn toàn không thấy ngữ cảnh của parent."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "計画フレームワークなし——モデルが全てを決定",
         "description": "プランナーもタスクキューも状態マシンもありません。システムプロンプトがモデルに問題の取り組み方を伝え、モデルがこれまでの会話に基づいて次に実行する bash コマンドを決定します。これは意図的な設計です：このレベルでは計画レイヤーの追加は時期尚早な抽象化です。モデルの思考の連鎖そのものが計画です。エージェントループはモデルがツールの呼び出しを止めるまで、次の行動を問い続けるだけです。"
+      },
+      "vi": {
+        "title": "Không có khung planning -- mô hình quyết định",
+        "description": "Không có planner, không có task queue, không có state machine. System prompt bảo mô hình cách tiếp cận vấn đề, và mô hình quyết định lệnh bash nào chạy tiếp dựa trên hội thoại đến hiện tại. Đây là chủ ý: ở tầng này, thêm lớp planning sẽ là trừu tượng sớm. Chuỗi suy nghĩ của mô hình CHÍNH LÀ kế hoạch. Vòng lặp Agent chỉ tiếp tục hỏi mô hình làm gì cho đến khi nó ngừng yêu cầu tool."
       }
     }
   ]

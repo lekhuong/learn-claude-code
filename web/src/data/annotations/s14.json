@@ -13,6 +13,10 @@
       "ja": {
         "title": "MCP ツールは正規化された名前空間を使う",
         "description": "発見されたツールは mcp__server__tool として公開されます。接頭辞により出所が明確になり、組み込みツールや別サーバーのツールとの衝突を避けます。"
+      },
+      "vi": {
+        "title": "MCP tool dùng namespace đã chuẩn hóa",
+        "description": "Tool đã phát hiện được expose thành mcp__server__tool. Prefix làm nguồn rõ và tránh va chạm với tool built-in hoặc tool từ server khác."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "ツール発見がアクティブなツールプールを更新する",
         "description": "サーバー接続後、ランタイムは次の LLM 呼び出し用に新しいツールプールを組み立てます。MCP ツールは発見で可視化された後にのみモデルが利用できます。"
+      },
+      "vi": {
+        "title": "Phát hiện tool cập nhật tool pool đang hoạt động",
+        "description": "Sau khi kết nối server, runtime lắp tool pool mới cho lần gọi LLM tiếp theo. Mô hình chỉ dùng MCP tool sau khi phát hiện đã làm chúng hiện ra."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "外部結果は tool result 経路を再利用する",
         "description": "MCP の応答は通常の tool result と同じように会話へ追加されます。エージェントループを変えずに外部システムを参加させられます。"
+      },
+      "vi": {
+        "title": "Kết quả bên ngoài tái sử dụng đường tool result",
+        "description": "Phản hồi MCP được append vào hội thoại như tool result thông thường. Vòng lặp Agent nhờ đó không đổi trong khi hệ thống bên ngoài vẫn tham gia được."
       }
     }
   ]

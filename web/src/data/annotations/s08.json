@@ -13,6 +13,10 @@
       "ja": {
         "title": "圧縮は低コストな処理から行う",
         "description": "大きな tool result の退避、中間履歴の切り詰め、古い出力の置換を LLM 要約より先に行います。多くのターンで追加モデル呼び出しを避けられます。"
+      },
+      "vi": {
+        "title": "Compaction chạy các lượt rẻ trước",
+        "description": "Cắt tool result lớn theo budget, tỉa lịch sử giữa, và thay output tool cũ chạy trước mọi tóm tắt LLM. Hầu hết lượt nên tránh thêm một lần gọi mô hình."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "大きな出力はサイドストアへ移す",
         "description": "transcript にはポインタだけを残し、完全な出力は別に保存します。証拠を失わず、モデルが巨大ログを読み直す必要もありません。"
+      },
+      "vi": {
+        "title": "Output lớn chuyển sang kho phụ",
+        "description": "Transcript giữ một con trỏ trong khi output đầy đủ được persist nơi khác. Điều này giữ khả năng phục hồi mà không buộc mô hình đọc lại log khổng lồ."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "Reactive compact が API 拒否を処理する",
         "description": "見積もり後でも API が prompt_too_long を返すことがあります。reactive_compact は圧縮して再試行する緊急経路です。"
+      },
+      "vi": {
+        "title": "Reactive compact xử lý API từ chối",
+        "description": "Dù đã ước lượng, API vẫn có thể từ chối prompt vì quá dài. reactive_compact là đường khẩn cấp compact rồi retry."
       }
     }
   ]

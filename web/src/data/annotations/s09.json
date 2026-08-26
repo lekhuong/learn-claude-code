@@ -13,6 +13,10 @@
       "ja": {
         "title": "小さな索引でメモリを低コストに保つ",
         "description": "MEMORY.md は短く常に存在します。索引が関連性を示す場合だけ、完全なメモリファイルを読み込みます。"
+      },
+      "vi": {
+        "title": "Index nhỏ giữ memory rẻ",
+        "description": "MEMORY.md giữ ngắn và luôn có mặt. File memory đầy đủ chỉ được tải khi index gợi ý chúng liên quan."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "メモリ抽出はターン後に行う",
         "description": "エージェントはまずユーザーのタスクを解き、その後で元メッセージから永続的な事実を抽出します。作業ループをメモリ管理で中断しません。"
+      },
+      "vi": {
+        "title": "Trích memory xảy ra sau lượt",
+        "description": "Agent trước hết giải task của người dùng, rồi trích sự thật bền từ các message gốc. Việc này tránh ngắt vòng làm việc bằng sổ sách memory."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "統合は常時ではなく定期的に行う",
         "description": "Dream 型の統合はメモリの結合や剪定を定期的に行います。日常の検索と重いメモリ保守を分離します。"
+      },
+      "vi": {
+        "title": "Hợp nhất mang tính định kỳ, không liên tục",
+        "description": "Hợp nhất kiểu Dream có thể gộp và tỉa memory định kỳ. Runtime tách truy xuất hàng ngày khỏi bảo trì memory nặng hơn."
       }
     }
   ]

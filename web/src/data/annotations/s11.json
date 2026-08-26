@@ -13,6 +13,10 @@
       "ja": {
         "title": "バックグラウンド処理は新ツールではなく実行モード",
         "description": "このレッスンでは既存のツール面を保ち、遅い操作にバックグラウンド実行フラグを加えます。同じ bash 呼び出しがループをブロックすることも、スレッドへ移すこともできる点が見えます。応答性はランタイムの責務であり、遅いタスクごとに新しいツールを作る必要はありません。"
+      },
+      "vi": {
+        "title": "Công việc nền là chế độ thực thi, không phải tool mới",
+        "description": "Bài học giữ bề mặt tool quen thuộc và thêm cờ thực thi nền quanh thao tác chậm. Cơ chế mới nhờ đó nhìn thấy được: cùng một lời gọi bash có thể chặn vòng lặp hoặc được đưa sang thread. Agent học rằng độ phản hồi là mối quan tâm của runtime, không phải lý do phát minh tool riêng cho mọi task chậm."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "完了したスレッドは通知として戻る",
         "description": "バックグラウンド結果は即時の tool result ではなくタスク通知として注入されます。モデルはまず作業開始を見て、その後に完了を知るため、会話の時系列が保たれます。"
+      },
+      "vi": {
+        "title": "Thread xong quay lại như notification",
+        "description": "Kết quả nền được inject như task notification thay vì giả làm tool result tức thì. Điều này giữ niên đại hội thoại: mô hình trước hết thấy việc đã bắt đầu, rồi sau mới thấy task hoàn thành."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "小さな共有ストアでスレッドを観測可能にする",
         "description": "実装は辞書でバックグラウンドタスクの状態と結果を追跡します。コードを学びやすく保ちながら、id、ライフサイクル、安全な収集という並行処理の要点を示します。"
+      },
+      "vi": {
+        "title": "Kho dùng chung nhỏ giữ thread quan sát được",
+        "description": "Implementation theo dõi trạng thái và kết quả background task trong dictionary tường minh. Code vẫn dạy được trong khi vẫn lộ phần khó của concurrency: id, trạng thái vòng đời, và thu thập an toàn."
       }
     }
   ]

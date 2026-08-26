@@ -13,6 +13,10 @@
       "ja": {
         "title": "タスクは永続 JSON ファイル",
         "description": "各タスクは .tasks/ に id、subject、description、status、owner、blockedBy を持って保存されます。タスクボードはコンテキスト圧縮や再起動を越えて残ります。"
+      },
+      "vi": {
+        "title": "Task là file JSON bền",
+        "description": "Mỗi task được persist dưới .tasks/ với id, subject, description, status, owner, và blockedBy. Bảng task sống sót qua compaction ngữ cảnh và restart process."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "ノードを作成してから辺を追加する",
         "description": "create_task は host が生成した ID を返します。全ノードの作成後、update_task は返された ID で blockedBy の辺を追加し、無効な変更や循環を拒否します。"
+      },
+      "vi": {
+        "title": "Tạo node trước khi thêm cạnh",
+        "description": "create_task trả ID do host sinh. Sau khi mọi node tồn tại, update_task dùng các ID đó để thêm cạnh blockedBy và từ chối thay đổi không hợp lệ hoặc cyclic."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "blockedBy が順序を表現する",
         "description": "blockedBy の依存がすべて完了した時だけタスクを claim できます。存在しない依存もブロック扱いにして fail closed にします。"
+      },
+      "vi": {
+        "title": "blockedBy mã hóa thứ tự",
+        "description": "Task chỉ được claim khi mọi dependency blockedBy đã hoàn thành. Dependency thiếu được coi là blocked để fail closed."
       }
     },
     {
@@ -55,6 +67,10 @@
       "ja": {
         "title": "claim と complete が作業を観測可能にする",
         "description": "claim_task は owner と in_progress を記録し、complete_task は完了を記録して解放された下流タスクを報告します。"
+      },
+      "vi": {
+        "title": "Claim và Complete làm việc quan sát được",
+        "description": "claim_task ghi owner và trạng thái in_progress; complete_task đánh dấu hoàn thành và báo các task phía dưới vừa được mở khóa."
       }
     }
   ]

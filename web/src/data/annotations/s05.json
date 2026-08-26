@@ -13,6 +13,10 @@
       "ja": {
         "title": "TodoWrite は隠れたプランナーではなくツール",
         "description": "計画は bash や read_file と同じツールディスパッチ経路に入ります。計画状態が可視化され、モデルが更新タイミングを選べます。"
+      },
+      "vi": {
+        "title": "TodoWrite là tool, không phải planner ẩn",
+        "description": "Planning đi vào cùng đường phân phối tool như bash hoặc read_file. Nhờ đó trạng thái kế hoạch nhìn thấy được và mô hình quyết định khi nào cập nhật."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "軽量リマインダーで計画の漂流を防ぐ",
         "description": "数ターン todo 更新がない場合、ランタイムはリマインダーを注入します。計画を奪わず、モデルに更新を促します。"
+      },
+      "vi": {
+        "title": "Nhắc nhẹ ngăn kế hoạch trôi",
+        "description": "Sau vài vòng không cập nhật todo, runtime inject một lời nhắc. Lời nhắc thúc mô hình mà không chiếm kế hoạch."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "現在の todo はセッション内に留める",
         "description": "TodoWrite は現在セッションの作業計画であり、永続的なプロジェクト管理ではありません。永続作業は後のタスクシステムが扱います。"
+      },
+      "vi": {
+        "title": "Todo hiện tại ở lại trong session",
+        "description": "TodoWrite dành cho kế hoạch làm việc của session hiện tại, không phải quản lý dự án bền. Hệ thống task sau này xử lý việc bền."
       }
     }
   ]

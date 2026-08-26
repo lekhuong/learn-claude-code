@@ -13,6 +13,10 @@
       "ja": {
         "title": "フックはループを書き換えず包み込む",
         "description": "UserPromptSubmit、PreToolUse、PostToolUse、Stop の各フックはライフサイクル地点に処理を追加し、model-tool-result ループ自体は保ちます。"
+      },
+      "vi": {
+        "title": "Hook bọc vòng lặp thay vì viết lại nó",
+        "description": "Hook UserPromptSubmit, PreToolUse, PostToolUse, và Stop gắn hành vi tại các điểm vòng đời trong khi vòng lặp model-tool-result giữ nguyên."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "PreToolUse はポリシー境界",
         "description": "PreToolUse はモデルがツールを選んだ後、handler 実行前に動きます。権限、ログ、安全ポリシーを入れる自然な場所です。"
+      },
+      "vi": {
+        "title": "PreToolUse là ranh giới policy",
+        "description": "Hook PreToolUse chạy sau khi mô hình chọn tool nhưng trước khi handler thực thi. Đó là điểm tự nhiên cho quyền, logging, và policy an toàn."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "PostToolUse が結果を観測可能にする",
         "description": "PostToolUse は出力サイズ確認、trace 記録、メタデータ変換を各 handler へ散らさずに行えます。"
+      },
+      "vi": {
+        "title": "PostToolUse giữ kết quả quan sát được",
+        "description": "Hook PostToolUse có thể kiểm kích thước output, ghi trace, hoặc biến đổi metadata mà không đổi mọi tool handler."
       }
     }
   ]

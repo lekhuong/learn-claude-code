@@ -13,6 +13,10 @@
       "ja": {
         "title": "権限確認はツール実行前に行う",
         "description": "権限確認はモデルの tool call と handler の間に入ります。モデルは操作を要求できますが、実際のワークスペースに触れてよいかは harness が決めます。"
+      },
+      "vi": {
+        "title": "Quyền chạy trước khi thực thi tool",
+        "description": "Kiểm tra quyền được chèn giữa lời gọi tool của mô hình và handler. Mô hình có thể xin một hành động, nhưng Harness quyết định hành động đó có được chạm workspace thật hay không."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "三つのゲートでポリシーを説明可能にする",
         "description": "ハード拒否、ルール照合、ユーザー承認を分けます。コマンドが不可能なのか、危険なのか、確認待ちなのかが明確になります。"
+      },
+      "vi": {
+        "title": "Ba cổng giữ policy giải thích được",
+        "description": "Từ chối cứng, khớp rule, và phê duyệt người dùng là các cổng tách nhau. Nhờ đó rõ một lệnh là bất khả thi, rủi ro, hay chỉ đang chờ xác nhận."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "ブロックされた呼び出しもループ状態を残す",
         "description": "ブロックされたツール呼び出しでも、ループの状態は一貫している必要があります。実行されなかった理由が分かって初めて次の行動を選べます。"
+      },
+      "vi": {
+        "title": "Lời gọi bị chặn vẫn tạo trạng thái vòng lặp",
+        "description": "Lời gọi tool bị chặn vẫn phải để vòng lặp ở trạng thái mạch lạc. Người dùng và mô hình cần biết vì sao không thực thi trước khi chọn hành động tiếp theo."
       }
     }
   ]

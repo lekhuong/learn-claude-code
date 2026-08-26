@@ -1,0 +1,15 @@
+.git
+.github
+.vercel
+agents
+docs
+skills
+tests
+web/node_modules
+web/.next
+web/out
+**/__pycache__
+*.pyc
+.DS_Store
+.env
+.env.local

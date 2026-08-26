@@ -17,6 +17,7 @@ const LOCALES = [
   { code: "en", label: "EN" },
   { code: "zh", label: "中文" },
   { code: "ja", label: "日本語" },
+  { code: "vi", label: "VI" },
 ];
 
 export function Header() {

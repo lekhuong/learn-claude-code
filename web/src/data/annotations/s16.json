@@ -13,6 +13,10 @@
       "ja": {
         "title": "固定された編成はコードが担う",
         "description": "段階と集約ルールが事前に決まっているなら、workflow script は main Agent loop を変えずに処理を並列化し、再現可能で検査可能にする。"
+      },
+      "vi": {
+        "title": "Code sở hữu điều phối cố định",
+        "description": "Khi các giai đoạn và rule gộp đã biết trước, script Workflow làm quy trình song song, lặp lại được, và kiểm được mà không đổi vòng lặp Agent chính."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "意味キーで完了順序に依存せず再開する",
         "description": "Journal は共有完了カウンタではなく安定した call 内容を key にする。並行 call の終了順が変わっても正しい cache result に対応できる。"
+      },
+      "vi": {
+        "title": "Semantic key làm resume không phụ thuộc thứ tự hoàn thành",
+        "description": "Mục journal dùng nội dung lời gọi ổn định chứ không phải counter hoàn thành dùng chung. Lời gọi đồng thời có thể xong theo thứ tự bất kỳ và vẫn map tới kết quả cache đúng."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "編成の失敗は上位へ伝播させる",
         "description": "stage failure、無効な structured result、破損 journal、run-wide limit 超過は workflow を失敗させ、項目を黙って落として成功扱いしない。"
+      },
+      "vi": {
+        "title": "Lỗi điều phối lan lên",
+        "description": "Stage thất bại, kết quả có cấu trúc không hợp lệ, journal hỏng, hoặc vượt giới hạn toàn lần chạy làm Workflow thất bại thay vì lặng lẽ bỏ một mục rồi báo thành công."
       }
     }
   ]

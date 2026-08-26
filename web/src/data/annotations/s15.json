@@ -13,6 +13,10 @@
       "ja": {
         "title": "Harness は既存レイヤーを統合する",
         "description": "統合された Harness はループを新しい構造で置き換えません。memory、task、skill、バックグラウンド処理、チーム、worktree、MCP を同じ model-tool-result サイクルの周囲に合成します。"
+      },
+      "vi": {
+        "title": "Harness ghép các tầng trước",
+        "description": "Integrated Harness không thay vòng lặp bằng kiến trúc mới. Nó ghép memory, tasks, skills, công việc nền, teams, worktree, và MCP quanh cùng chu trình model-tool-result cốt lõi."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "ランタイム状態には名前付きの出所がある",
         "description": "コンテキスト組み立ては memory、task graph、skills、tool registry、policy などの名前付きソースから取得します。各 prompt context に所有者があるため、大きなエージェントでもデバッグ可能です。"
+      },
+      "vi": {
+        "title": "Trạng thái runtime có nguồn được đặt tên",
+        "description": "Lắp ngữ cảnh lấy từ nguồn được đặt tên như memory, task graph, skills, tool registry, và policy. Agent lớn nhờ đó debug được vì mỗi mảnh prompt context có chủ."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "リカバリは主要フローの一部",
         "description": "圧縮、エラー回復、非同期結果収集を通常のループ動作として扱います。Harness は回復と再開を名前付きの経路にまとめ、例外分岐へ散らしません。"
+      },
+      "vi": {
+        "title": "Phục hồi là một phần của luồng chính",
+        "description": "Compaction, phục hồi lỗi, và thu thập kết quả bất đồng bộ là hành vi vòng lặp bình thường. Harness xử lý phục hồi và resume qua các đường được đặt tên thay vì nhánh exception rải rác."
       }
     }
   ]

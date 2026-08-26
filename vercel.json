@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci --prefix web",
+  "buildCommand": "npm run build --prefix web",
+  "outputDirectory": "web/out",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/vi",
+      "permanent": false
+    }
+  ]
+}

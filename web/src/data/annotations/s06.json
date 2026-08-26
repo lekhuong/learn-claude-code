@@ -13,6 +13,10 @@
       "ja": {
         "title": "サブエージェントは新しい messages で始まる",
         "description": "サブエージェントは委任された prompt だけを受け取る。中間ツール呼び出しは別のメッセージリストに残り、親会話へコピーされない。"
+      },
+      "vi": {
+        "title": "Subagent bắt đầu với messages mới",
+        "description": "Subagent chỉ nhận prompt được ủy thác. Các lời gọi tool trung gian ở lại danh sách message riêng thay vì được copy vào hội thoại parent."
       }
     },
     {
@@ -27,6 +31,10 @@
       "ja": {
         "title": "親に戻るのは最終テキストだけ",
         "description": "親が受け取るのは task result となる最終テキストであり、サブエージェントの完全なメッセージリストではない。"
+      },
+      "vi": {
+        "title": "Chỉ text cuối trở về parent",
+        "description": "Parent nhận text cuối của subagent làm kết quả task, không phải toàn bộ danh sách message của subagent."
       }
     },
     {
@@ -41,6 +49,10 @@
       "ja": {
         "title": "サブエージェントに task ツールはない",
         "description": "サブエージェントのツールセットに task はなく、本章の委任は 1 階層となる。"
+      },
+      "vi": {
+        "title": "Subagent không có tool task",
+        "description": "Bộ tool của subagent bỏ task, nên bài học này có một cấp ủy thác."
       }
     }
   ]
