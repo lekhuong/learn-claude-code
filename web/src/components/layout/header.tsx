@@ -42,7 +42,7 @@ export function Header() {
 
   function switchLocale(newLocale: string) {
     const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    window.location.href = newPath;
+    window.location.href = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${newPath}`;
   }
 
   return (

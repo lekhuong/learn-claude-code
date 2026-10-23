@@ -2,12 +2,28 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "npm ci --prefix web",
-  "buildCommand": "npm run build --prefix web",
-  "outputDirectory": "web/out",
+  "buildCommand": "npm run build --prefix web && rm -rf dist && mkdir dist && cp -R web/out dist/claude-code",
+  "outputDirectory": "dist",
+  "trailingSlash": true,
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_BASE_PATH": "/claude-code"
+    }
+  },
   "redirects": [
     {
       "source": "/",
-      "destination": "/vi",
+      "destination": "/claude-code/vi/",
+      "permanent": false
+    },
+    {
+      "source": "/claude-code/",
+      "destination": "/claude-code/vi/",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!claude-code).+)",
+      "destination": "/claude-code/:path",
       "permanent": false
     }
   ]
