@@ -59,6 +59,10 @@ function postProcessHtml(html: string): string {
     (_, start) => `<ol style="counter-reset:step-counter ${parseInt(start) - 1}">`
   );
 
+  // Root-relative links and images in the Markdown need the deployment base path.
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  if (base) html = html.replace(/\b(href|src)="\/(?!\/)/g, `$1="${base}/`);
+
   return html;
 }
 
