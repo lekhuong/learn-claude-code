@@ -38,6 +38,12 @@ MEMORY_DIR = WORKDIR / ".memory"
 MEMORY_INDEX = MEMORY_DIR / "MEMORY.md"
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
+ENVIRONMENT_PROMPT = (
+    "Windows: the bash tool runs through cmd.exe; use cmd.exe syntax, not Unix "
+    "Bash or PowerShell syntax, and prefer dedicated file tools for file operations"
+    if os.name == "nt"
+    else "Unix-like: the bash tool runs the system shell"
+)
 
 # -- Memory store --
 
@@ -332,7 +338,7 @@ def build_system(relevant_memories: str = "") -> str:
     index = read_memory_index()
     sections = [
         (
-            f"You are a coding agent at {WORKDIR}. "
+            f"You are a coding agent at {WORKDIR}. Environment: {ENVIRONMENT_PROMPT}. "
             "Use tools to solve tasks. Act, don't explain."
         ),
         (
@@ -634,7 +640,15 @@ def trigger_hooks(event: str, *args):
     return None
 
 DENY_LIST = ["rm -rf /", "sudo", "shutdown", "reboot", "mkfs", "dd if="]
+DESTRUCTIVE_COMMAND_WORD = re.compile(
+    r"(?i)(?:^|[;&|()\n])\s*(?:rm|del)(?=\s|$|[;&|()])"
+)
 DESTRUCTIVE = ["rm ", "> /etc/", "chmod 777"]
+
+
+def contains_destructive_command(command: str) -> bool:
+    return bool(DESTRUCTIVE_COMMAND_WORD.search(command))
+
 
 def permission_hook(block):
     if block.name == "bash":
@@ -642,7 +656,9 @@ def permission_hook(block):
         for pattern in DENY_LIST:
             if pattern in command:
                 return f"Permission denied by deny list: {pattern}"
-        if any(keyword in command for keyword in DESTRUCTIVE):
+        if contains_destructive_command(command) or any(
+            keyword in command for keyword in DESTRUCTIVE
+        ):
             print("\n\033[33m[permission] Potentially destructive command\033[0m")
             print(f"   Tool: {block.name}({block.input})")
             if input("   Allow? [y/N] ").strip().lower() not in ("y", "yes"):
