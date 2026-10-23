@@ -11,7 +11,20 @@
     }
   },
   "redirects": [
-    { "source": "/", "destination": "/claude-code/vi/", "permanent": false },
-    { "source": "/claude-code/", "destination": "/claude-code/vi/", "permanent": false }
+    {
+      "source": "/",
+      "destination": "/claude-code/vi/",
+      "permanent": false
+    },
+    {
+      "source": "/claude-code/",
+      "destination": "/claude-code/vi/",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!claude-code).+)",
+      "destination": "/claude-code/:path",
+      "permanent": false
+    }
   ]
 }
