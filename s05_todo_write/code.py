@@ -25,6 +25,7 @@ without an update, the harness adds a reminder alongside the tool results.
 import ast
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -46,8 +47,14 @@ client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
 # s05 change: SYSTEM prompt adds planning guidance
+ENVIRONMENT_PROMPT = (
+    "Windows: the bash tool runs through cmd.exe; use cmd.exe syntax, not Unix "
+    "Bash or PowerShell syntax, and prefer dedicated file tools for file operations"
+    if os.name == "nt"
+    else "Unix-like: the bash tool runs the system shell"
+)
 SYSTEM = (
-    f"You are a coding agent at {WORKDIR}. "
+    f"You are a coding agent at {WORKDIR}. Environment: {ENVIRONMENT_PROMPT}. "
     "Before starting any multi-step task, use todo_write to plan your steps. "
     "Update status as you go."
 )
@@ -218,7 +225,15 @@ def trigger_hooks(event: str, *args):
     return None
 
 DENY_LIST = ["rm -rf /", "sudo", "shutdown", "reboot", "mkfs", "dd if="]
+DESTRUCTIVE_COMMAND_WORD = re.compile(
+    r"(?i)(?:^|[;&|()\n])\s*(?:rm|del)(?=\s|$|[;&|()])"
+)
 DESTRUCTIVE = ["rm ", "> /etc/", "chmod 777"]
+
+
+def contains_destructive_command(command: str) -> bool:
+    return bool(DESTRUCTIVE_COMMAND_WORD.search(command))
+
 
 def permission_hook(block):
     """PreToolUse: s03 permission logic, registered as an s04 hook."""
@@ -228,13 +243,14 @@ def permission_hook(block):
             if pattern in command:
                 print(f"\n\033[31m[blocked] '{pattern}'\033[0m")
                 return "Permission denied by deny list"
-        for keyword in DESTRUCTIVE:
-            if keyword in command:
-                print(f"\n\033[33m[permission] Potentially destructive command\033[0m")
-                print(f"   Tool: {block.name}({block.input})")
-                choice = input("   Allow? [y/N] ").strip().lower()
-                if choice not in ("y", "yes"):
-                    return "Permission denied by user"
+        if contains_destructive_command(command) or any(
+            keyword in command for keyword in DESTRUCTIVE
+        ):
+            print(f"\n\033[33m[permission] Potentially destructive command\033[0m")
+            print(f"   Tool: {block.name}({block.input})")
+            choice = input("   Allow? [y/N] ").strip().lower()
+            if choice not in ("y", "yes"):
+                return "Permission denied by user"
     if block.name in ("read_file", "write_file", "edit_file"):
         path = block.input.get("path", "")
         if not (WORKDIR / path).resolve().is_relative_to(WORKDIR):

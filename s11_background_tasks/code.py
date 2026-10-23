@@ -14,6 +14,7 @@ s11_background_tasks.py - Background Tasks
 import atexit
 import glob
 import os
+import re
 import signal
 import subprocess
 import threading
@@ -41,8 +42,15 @@ WORKDIR = Path.cwd()
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
+ENVIRONMENT_PROMPT = (
+    "Windows: the bash tool runs through cmd.exe; use cmd.exe syntax, not Unix "
+    "Bash or PowerShell syntax, and prefer dedicated file tools for file operations"
+    if os.name == "nt"
+    else "Unix-like: the bash tool runs the system shell"
+)
 SYSTEM = (
-    f"You are a coding agent at {WORKDIR}. Use tools to solve tasks. "
+    f"You are a coding agent at {WORKDIR}. Environment: {ENVIRONMENT_PROMPT}. "
+    "Use tools to solve tasks. "
     "Set run_in_background to true only for independent Bash commands."
 )
 
@@ -54,8 +62,28 @@ _shell_process_lock = threading.RLock()
 
 
 def _stop_process_group(process: subprocess.Popen):
-    """Stop processes that remain in the command's original process group."""
-    for sig in (signal.SIGTERM, signal.SIGKILL):
+    """Stop a shell process and its children (cross-platform).
+
+    POSIX uses process-group signals (SIGTERM then SIGKILL). Windows has
+    neither ``os.killpg`` nor ``signal.SIGKILL``, so it falls back to
+    ``Popen.terminate()`` / ``Popen.kill()``.
+    """
+    if os.name == "nt":
+        for stop in (process.terminate, process.kill):
+            if process.poll() is not None:
+                return
+            try:
+                stop()
+            except OSError:
+                return
+            try:
+                process.wait(timeout=0.05)
+            except subprocess.TimeoutExpired:
+                continue
+        return
+
+    # SIGKILL is POSIX-only; fall back to SIGTERM on platforms without it.
+    for sig in (signal.SIGTERM, getattr(signal, "SIGKILL", signal.SIGTERM)):
         try:
             os.killpg(process.pid, sig)
         except (ProcessLookupError, OSError):
@@ -82,6 +110,8 @@ signal.signal(signal.SIGTERM, _handle_termination_signal)
 def _run_bash_process(command: str) -> tuple[str, int | None]:
     process = None
     try:
+        # start_new_session (setsid) exists only on POSIX; skip it on Windows.
+        popen_kwargs = {} if os.name == "nt" else {"start_new_session": True}
         process = subprocess.Popen(
             command,
             shell=True,
@@ -89,7 +119,7 @@ def _run_bash_process(command: str) -> tuple[str, int | None]:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True, errors="replace",
-            start_new_session=True,
+            **popen_kwargs,
         )
         with _shell_process_lock:
             _shell_processes.add(process)
@@ -225,7 +255,14 @@ def trigger_hooks(event: str, *args):
 
 
 DENY_LIST = ["rm -rf /", "sudo", "shutdown", "reboot", "mkfs", "dd if="]
+DESTRUCTIVE_COMMAND_WORD = re.compile(
+    r"(?i)(?:^|[;&|()\n])\s*(?:rm|del)(?=\s|$|[;&|()])"
+)
 DESTRUCTIVE = ["rm ", "> /etc/", "chmod 777"]
+
+
+def contains_destructive_command(command: str) -> bool:
+    return bool(DESTRUCTIVE_COMMAND_WORD.search(command))
 
 
 def permission_hook(block):
@@ -235,7 +272,9 @@ def permission_hook(block):
             if pattern in command:
                 print(f"\n\033[31m[blocked] '{pattern}'\033[0m")
                 return "Permission denied by deny list"
-        if any(keyword in command for keyword in DESTRUCTIVE):
+        if contains_destructive_command(command) or any(
+            keyword in command for keyword in DESTRUCTIVE
+        ):
             print("\n\033[33m[permission] Potentially destructive command\033[0m")
             print(f"   Tool: {block.name}({block.input})")
             choice = input("   Allow? [y/N] ").strip().lower()

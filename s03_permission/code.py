@@ -32,6 +32,7 @@ Builds on s02 (multi-tool). Usage:
 """
 
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -55,7 +56,17 @@ WORKDIR = Path.cwd()
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
-SYSTEM = f"You are a coding agent at {WORKDIR}. All destructive operations require user approval."
+ENVIRONMENT_PROMPT = (
+    "Windows: the bash tool runs through cmd.exe; use cmd.exe syntax, not Unix "
+    "Bash or PowerShell syntax, and prefer dedicated file tools for file operations"
+    if os.name == "nt"
+    else "Unix-like: the bash tool runs the system shell"
+)
+
+SYSTEM = (
+    f"You are a coding agent at {WORKDIR}. Environment: {ENVIRONMENT_PROMPT}. "
+    "All destructive operations require user approval."
+)
 
 
 # -- From s02: tool implementations --
@@ -152,12 +163,22 @@ def check_deny_list(command: str) -> str | None:
 
 
 # Gate 2: Rule matching - context-dependent checks
+DESTRUCTIVE_COMMAND_WORD = re.compile(
+    r"(?i)(?:^|[;&|()\n])\s*(?:rm|del)(?=\s|$|[;&|()])"
+)
+
+
+def contains_destructive_command(command: str) -> bool:
+    return bool(DESTRUCTIVE_COMMAND_WORD.search(command))
+
+
 PERMISSION_RULES = [
     {"tools": ["read_file", "write_file", "edit_file"],
      "check": lambda args: not (WORKDIR / args.get("path", "")).resolve().is_relative_to(WORKDIR),
      "message": "Writing outside workspace"},
     {"tools": ["bash"],
-     "check": lambda args: any(kw in args.get("command", "") for kw in ["rm ", "> /etc/", "chmod 777"]),
+     "check": lambda args: contains_destructive_command(args.get("command", "")) or
+     any(kw in args.get("command", "") for kw in ["rm ", "> /etc/", "chmod 777"]),
      "message": "Potentially destructive command"},
 ]
 
